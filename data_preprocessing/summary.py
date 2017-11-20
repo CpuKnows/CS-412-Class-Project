@@ -6,12 +6,8 @@ Created on Sat Nov 11 12:10:41 2017
 
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression,Ridge, RidgeCV, LassoCV, ElasticNetCV
-from sklearn.metrics import mean_squared_error, make_scorer
 import matplotlib.pyplot as plt
-import matplotlib
 import seaborn as sns
 
 def columns_and_types(iData):
@@ -31,8 +27,7 @@ def describe(iData, feature):
     
     
 def pair_plot(iData):
-    cols = ['SalePrice','Overall Qual','Gr Liv Area','Garage Cars','Garage Area','Total Bsmt SF','1st Flr SF','Full Bath','TotRms AbvGrd','Year Built']
-            
+    cols = ['SalePrice','OverallQual','GrLivArea','GarageCars','GarageArea','TotalBsmtSF','1stFlrSF','FullBath','TotRmsAbvGrd','YearBuilt']
     sns.pairplot(iData[cols],size=2.5)
     plt.show()
     
@@ -50,9 +45,9 @@ def missing_data(iData):
 def feature_stats(iData, feature):
     print(feature, end = ' ')
     print(' with mean of 0 and standard deviation of 1==')
-    saleprice_scaled = StandardScaler().fit_transform(iData[feature][:,np.newaxis]);
-    low_range = saleprice_scaled[saleprice_scaled[:,0].argsort()][:10]
-    high_range= saleprice_scaled[saleprice_scaled[:,0].argsort()][-10:]
+    feature_scaled = StandardScaler().fit_transform(iData[feature][:,np.newaxis]);
+    low_range = feature_scaled[feature_scaled[:,0].argsort()][:10]
+    high_range= feature_scaled[feature_scaled[:,0].argsort()][-10:]
     print('outer range (low) of the distribution:')
     print(low_range)
     print('\nouter range (high) of the distribution:')

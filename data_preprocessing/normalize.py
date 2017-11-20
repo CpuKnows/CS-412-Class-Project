@@ -18,7 +18,7 @@ def normalize(iData):
     iData = take_nonzero_log(iData, 'TotalBsmtSF', 'HasBsmt')
 
     #very dangerous, removes entire column if 1 record is missing.  Use with cuation.
-    iData = drop_cols_with_missing_data(iData)    
+    #iData = drop_cols_with_missing_data(iData)    
     
     iData = drop_column(iData, 'MiscFeature')
     return iData
