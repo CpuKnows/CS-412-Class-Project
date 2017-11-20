@@ -9,6 +9,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 import seaborn as sns
+from scipy import stats
 
 def columns_and_types(iData):
     out_list = []
@@ -27,7 +28,7 @@ def describe(iData, feature):
     
     
 def pair_plot(iData):
-    cols = ['SalePrice','OverallQual','GrLivArea','GarageCars','GarageArea','TotalBsmtSF','1stFlrSF','FullBath','TotRmsAbvGrd','YearBuilt']
+    cols = ['SalePrice','OverallQual','GrLivArea','GarageArea','1stFlrSF','FullBath','YearBuilt']
     sns.pairplot(iData[cols],size=2.5)
     plt.show()
     
@@ -68,8 +69,11 @@ def all_correlations(iData):
     plt.show()
     
 def histogram(iData, feature):
-    sns.distplot(iData[feature]);
+    sns.distplot(iData[feature], fit= stats.norm);
+    fig = plt.figure()
+    res = stats.probplot(iData[feature], plot=plt)
     plt.show()
+    
 
 def box_whisker_plot(iData, feature1, feature2):
     data = pd.concat([iData[feature1], iData[feature2]], axis=1)
