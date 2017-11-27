@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sns
-import summary
+import data_preprocessing.summary
 
 def normalize(iData):
 
@@ -40,6 +40,7 @@ def take_logs(iData):
     
 def remove_correlated_features(iData):
     #highly correlated with greatliveara
+    
     iData = iData.drop('TotRmsAbvGrd', 1)
     
     #highly correlated with Garage area
@@ -84,7 +85,6 @@ def take_nonzero_log(iData, feature):
     
     return iData
     
-    
 def take_log(iData, feature):
     iData[feature] = np.log(iData[feature])
     iData = iData.rename(columns = {feature: 'log_' + feature})
@@ -95,5 +95,5 @@ def drop_cols_with_missing_data(iData):
     total = iData.isnull().sum().sort_values(ascending=False)
     percent = (iData.isnull().sum()/iData.isnull().count()).sort_values(ascending=False)
     missing_data = pd.concat([total, percent], axis=1, keys=['Total', 'Percent'])
-    
-    return iData.drop((missing_data[missing_data['Total'] >= 1]).index,1)
+    iData = iData.drop(iData.loc[iData['Electrical'].isnull()].index)
+    return iData.drop((missing_data[missing_data['Total'] >= 8]).index,1)
