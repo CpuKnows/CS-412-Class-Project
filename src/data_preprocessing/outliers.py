@@ -12,30 +12,20 @@ from scipy.stats import skew
 
 
 def remove_outliers(iData):
-
-	#based on GrLivArea
-	iData = iData.drop(iData[iData['Id'] == 1299].index)
-	iData = iData.drop(iData[iData['Id'] == 524].index)
-	
-	#based on lot frontage, anything with value > 300 removed
-	iData = iData.drop(iData[iData['Id'] == 935].index)
-	
-	#based on lot area, anything with value > 100,000 removed
-	iData = iData.drop(iData[iData['Id'] == 250].index)
-	iData = iData.drop(iData[iData['Id'] == 314].index)
-	iData = iData.drop(iData[iData['Id'] == 336].index)
-	iData = iData.drop(iData[iData['Id'] == 707].index)
-	iData = iData.drop(iData[iData['LotArea'] >55000].index)
-
-	#based on sale price, anything with a value over 600,000
-	iData = iData.drop(iData[iData['Id'] == 692].index)
-	iData = iData.drop(iData[iData['Id'] == 899].index)
-	iData = iData.drop(iData[iData['Id'] == 1170].index)
-	iData = iData.drop(iData[iData['Id'] == 1183].index)
-	
-	
-
-	return iData
+   
+    iData = iData.drop(iData[iData['GrLivArea'] >4000].index)
+    
+    #based on lot frontage, anything with value > 300 removed
+    iData = iData.drop(iData[iData['LotFrontage'] > 300].index)
+    
+    #based on lot area, anything with value > 100,000 removed
+    iData = iData.drop(iData[iData['LotArea'] >55000].index)
+    
+    #based on sale price, anything with a value over 600,000
+    iData = iData.drop(iData[iData['SalePrice'] > 600000].index)
+    		
+    
+    return iData
 
 #Generic Outlier detector method
 #https://stackoverflow.com/questions/22354094/pythonic-way-of-detecting-outliers-in-one-dimensional-observation-data/22357811#22357811
