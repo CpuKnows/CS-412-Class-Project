@@ -81,8 +81,9 @@ def add_yn_feature(iData, feature, based_on):
 
 def take_nonzero_log(iData, feature):
     temp = iData.loc[iData[feature]>0]
-    iData.loc[iData[feature]>0,feature] = np.log(temp[feature])
     
+    iData.loc[iData[feature]>0,feature] = np.log(temp[feature])
+    iData = iData.rename(columns = {feature: 'log_' + feature})
     return iData
     
 def take_log(iData, feature):
