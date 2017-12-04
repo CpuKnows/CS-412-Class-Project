@@ -19,11 +19,14 @@ def remove_outliers(iData):
     iData = iData.drop(iData[iData['LotFrontage'] > 300].index)
     
     #based on lot area, anything with value > 100,000 removed
-    iData = iData.drop(iData[iData['LotArea'] >55000].index)
+    iData = iData.drop(iData[iData['LotArea'] >30000].index)
     
     #based on sale price, anything with a value over 600,000
     iData = iData.drop(iData[iData['SalePrice'] > 600000].index)
     		
+    iData = iData.drop(iData[iData['SalePrice'] < 40000].index)
+    
+    iData = iData.drop(iData[iData['WoodDeckSF'] > 800].index)
     
     return iData
 
