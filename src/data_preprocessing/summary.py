@@ -92,3 +92,20 @@ def scatter_plot_nonzero(iData, feature1, feature2):
     data = pd.concat([iData[feature1], iData[feature2]], axis=1)
     data.plot.scatter(x=feature1, y=feature2);
     plt.show()
+
+def pred_vs_actual_plot(prediction, actual):
+    """
+    Scatter plot of prediction vs actual with line on identity
+
+    :param prediction: predicted values, array-like
+    :param actual: actual values, array-like
+    """
+    plt.figure(figsize=(7, 7))
+
+    plt.scatter(actual, prediction, s=20)
+    plt.plot([min(actual), max(actual)], [min(actual), max(actual)])
+
+    plt.title('Predicted vs. Actual')
+    plt.xlabel('Actual Sale Price')
+    plt.ylabel('Predicted Sale Price')
+    plt.show()
