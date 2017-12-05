@@ -23,6 +23,8 @@ def normalize(iData):
     #unnecessary features
     iData = iData.drop('MiscFeature', 1)
     iData = iData.drop( 'MiscVal', 1)
+    iData = iData.drop('Id', 1)
+    iData = iData.drop('PID', 1)
     
     #add 0 1 encoding
     iData = pd.get_dummies(iData)
